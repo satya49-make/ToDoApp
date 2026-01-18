@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: ToDoApp
+  mongodb:
+    uri: mongodb+srv://ysatyaprakash066_db_user:rCh5pueLMyKhFOSX@cluster0.6oekzak.mongodb.net/doto_application?retryWrites=true&w=majority&appName=Cluster0
+    database: doto_application
+
+
+#
+#  data:
+#    mongodb:
+#      uri: mongodb+srv://ysatyaprakash066_db_user:rCh5pueLMyKhFOSX@cluster0.6oekzak.mongodb.net/doto_application?retryWrites=true&w=majority&appName=Cluster0
+#      database: doto_application
+
+logging:
+  level:
+    org.springframework.data.mongodb: DEBUG
+    org.mongodb.driver: INFO
