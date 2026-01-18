@@ -14,6 +14,7 @@ public class TaskResponse {
     private String id;
     private String title;
     private String description;
+    private String username;
     private TaskStatus status;
     private int progress;
     private LocalDateTime createdAt;

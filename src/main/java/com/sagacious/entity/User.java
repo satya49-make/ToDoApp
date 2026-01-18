@@ -1,21 +1,19 @@
-//package com.sagacious.entity;
-//
-//import jakarta.persistence.*;
-//import lombok.Data;
-//
-//@Data
-//@Entity
-//@Table(name = "users")
-//public class User {
-//
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long id;
-//
-//    private String email;
-//    private String username;
-//    private String password;
-//
-//    @Enumerated(EnumType.STRING)
-//    private Role role;
-//}
+package com.sagacious.entity;
+
+import lombok.Data;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import com.sagacious.enums.Role;
+
+@Data
+@Document(collection = "users")
+public class User {
+
+    @Id
+    private String id;
+
+    private String email;
+    private String username;
+    private String password;
+    private Role role;
+}

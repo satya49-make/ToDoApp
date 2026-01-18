@@ -4,6 +4,8 @@ spring:
   mongodb:
     uri:
     database: doto_application
+jwt:
+  secret: "mysupersecuresecretkeymysupersecuresecretkey" # at least 32 chars
 
 
 logging:

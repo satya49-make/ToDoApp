@@ -15,6 +15,7 @@ public class Task {
     private String title;
     private String description;
     private TaskStatus status;   // use enum instead of String
+    private String username;     // owner of the task (linked to JWT user)
     private int progress;        // percentage 0–100
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
