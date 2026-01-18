@@ -41,7 +41,14 @@ public class SecurityConfig {
                 .formLogin(ServerHttpSecurity.FormLoginSpec::disable)
                 .httpBasic(ServerHttpSecurity.HttpBasicSpec::disable)
                 .authorizeExchange(exchanges -> exchanges
+                        // Allow Swagger UI and API docs without authentication
+                        .pathMatchers("/swagger-ui.html",
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**",
+                                "/webjars/**").permitAll()
+                        // Allow auth endpoints
                         .pathMatchers("/auth/**").permitAll()
+                        // RBAC for tasks
                         .pathMatchers("/tasks/all").hasRole("ADMIN")
                         .pathMatchers("/tasks/**").hasAnyRole("USER", "ADMIN")
                         .anyExchange().authenticated()
