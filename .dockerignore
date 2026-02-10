@@ -1,0 +1,22 @@
+# Ignore Gradle and build artifacts
+.gradle
+build
+out
+
+# Ignore local configuration
+.gradle*
+local.properties
+
+# Ignore IDE files
+*.iml
+.idea
+.vscode
+
+# Ignore logs and temporary files
+*.log
+tmp
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
