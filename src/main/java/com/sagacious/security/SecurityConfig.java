@@ -1,7 +1,9 @@
 package com.sagacious.security;
 
+import io.netty.handler.codec.http.HttpMethod;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity;
 import org.springframework.security.config.web.server.SecurityWebFiltersOrder;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
@@ -41,6 +43,7 @@ public class SecurityConfig {
                 .formLogin(ServerHttpSecurity.FormLoginSpec::disable)
                 .httpBasic(ServerHttpSecurity.HttpBasicSpec::disable)
                 .authorizeExchange(exchanges -> exchanges
+                        .pathMatchers(String.valueOf(HttpMethod.OPTIONS), "/**").permitAll() // allow preflight requests
                         // Allow Swagger UI and API docs without authentication
                         .pathMatchers("/swagger-ui.html",
                                 "/swagger-ui/**",
@@ -54,6 +57,7 @@ public class SecurityConfig {
                         .anyExchange().authenticated()
                 )
                 .addFilterAt(jwtFilter, SecurityWebFiltersOrder.AUTHENTICATION)
+                .cors(Customizer.withDefaults())
                 .build();
     }
 }

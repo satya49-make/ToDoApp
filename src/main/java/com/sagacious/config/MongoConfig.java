@@ -18,7 +18,7 @@ public class MongoConfig {
     public MongoClient mongoClient() {
         // Replace <username>, <password>, and <cluster-url> with your Atlas details
         ConnectionString connectionString = new ConnectionString(
-                "mongodb+srv://ysatyaprakash066_db_user:rCh5pueLMyKhFOSX@cluster0.6oekzak.mongodb.net/doto_application?retryWrites=true&w=majority&appName=Cluster0"
+                "mongodb://localhost:27017"
         );
         MongoClientSettings mongoClientSettings = MongoClientSettings.builder()
                 .applyConnectionString(connectionString)

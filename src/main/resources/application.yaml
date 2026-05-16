@@ -1,12 +1,13 @@
+server:
+  port: 8081
 spring:
   application:
     name: ToDoApp
   mongodb:
-    uri:
+    uri: mongodb://localhost:27017
     database: doto_application
 jwt:
   secret: "mysupersecuresecretkeymysupersecuresecretkey" # at least 32 chars
-
 
 logging:
   level:
