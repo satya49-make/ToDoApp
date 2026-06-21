@@ -1,17 +1,25 @@
 # Multi-stage Dockerfile for building and running the Spring Boot application
 # Build stage: use a JDK image to run the Gradle wrapper and produce the fat jar
-FROM eclipse-temurin:17-jdk-jammy AS build
+# Stage 1: Build the Spring Boot app with Gradle
+FROM gradle:8.5-jdk17 AS build
 WORKDIR /workspace
-# Copy everything and run the build (skip tests to speed up image builds by default)
 COPY . .
-RUN ./gradlew -x test bootJar --no-daemon
+RUN chmod +x gradlew && ./gradlew -x test bootJar --no-daemon
 
-# Runtime stage: smaller JRE image
+# Stage 2: Run the app in a slim JRE image
 FROM eclipse-temurin:17-jre-jammy
-ARG JAVA_OPTS="-Xms256m -Xmx512m"
-ENV JAVA_OPTS=${JAVA_OPTS}
-VOLUME /tmp
-COPY --from=build /workspace/build/libs/*.jar /app/app.jar
-ENTRYPOINT ["sh","-c","java $JAVA_OPTS -jar /app/app.jar"]
+WORKDIR /app
+
+# Optional JVM tuning
+ENV JAVA_OPTS="-Xms256m -Xmx512m"
+
+# Copy the fat JAR from the build stage
+COPY --from=build /workspace/build/libs/*.jar app.jar
+
+# Expose the application port
 EXPOSE 8080
+
+# Run the application
+ENTRYPOINT exec java $JAVA_OPTS -jar app.jar
+
 
